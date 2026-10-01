@@ -473,7 +473,7 @@ body{
 
       </div>
 
-      <section class="calendar panel" aria-label="Current month calendar">
+      <section class="calendar panel" aria-label="Current month calendar" onclick="openIOSCalendar()" style="cursor:pointer">
 
         <div class="calendar-head">
           <span>‹</span>
@@ -757,7 +757,9 @@ function loadVision(){
     r.readAsDataURL(f);
   };
 }
-
+function openIOSCalendar(){
+  window.location.href='calshow://';
+}
 updateLiveClock();
 
 setInterval(
