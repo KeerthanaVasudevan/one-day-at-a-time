@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>HOME · ONE DAY AT A TIME</title>
+<style>
+:root{
+  --black:#171513;
+  --charcoal:#292522;
+  --walnut:#4b382d;
+  --walnut2:#624a3b;
+  --forest:#304b3b;
+  --taupe:#b9aa99;
+  --cream:#e8dfd3;
+  --soft:#d6c9ba;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Georgia,"Times New Roman",serif;background:var(--black);color:var(--cream)}
+body{
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(89,116,83,.16), transparent 30%),
+    radial-gradient(circle at 82% 8%, rgba(145,103,72,.20), transparent 28%),
+    linear-gradient(135deg,#1a1816 0%,#2b2521 45%,#181614 100%);
+  overflow-x:hidden;
+}
+body:before{
+  content:"";
+  position:fixed;inset:0;pointer-events:none;opacity:.28;
+  background:
+    radial-gradient(ellipse at 10% 35%, rgba(73,104,72,.22), transparent 20%),
+    radial-gradient(ellipse at 92% 72%, rgba(105,78,60,.20), transparent 22%);
+}
+.shell{width:min(1180px,92vw);margin:0 auto;padding:34px 0 60px;position:relative;z-index:1}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.back{
+  color:var(--cream);text-decoration:none;background:rgba(75,56,45,.9);
+  border:1px solid rgba(232,223,211,.28);padding:10px 15px;border-radius:10px;
+  letter-spacing:.08em;font-size:12px;text-transform:uppercase
+}
+h1{font-size:clamp(30px,4vw,52px);font-weight:500;letter-spacing:.12em;margin:22px 0 8px;text-align:center}
+.subtitle{text-align:center;color:var(--taupe);letter-spacing:.14em;text-transform:uppercase;font-size:11px}
+.grid{display:grid;grid-template-columns:1.25fr .75fr;gap:22px;margin-top:38px}
+.card{
+  background:rgba(75,56,45,.78);border:1px solid rgba(232,223,211,.24);
+  border-radius:16px;padding:24px;box-shadow:0 18px 40px rgba(0,0,0,.25);backdrop-filter:blur(3px)
+}
+.card h2{margin:0 0 16px;font-size:18px;font-weight:500;letter-spacing:.08em}
+.hero{min-height:310px;display:flex;flex-direction:column;justify-content:flex-end}
+.hero .eyebrow{color:#b7c6ad;text-transform:uppercase;letter-spacing:.18em;font-size:11px}
+.hero h2{font-size:34px;margin:10px 0}
+.hero p{max-width:600px;line-height:1.65;color:var(--soft);margin:0}
+.list{display:grid;gap:10px}
+.item{
+  display:flex;justify-content:space-between;gap:14px;padding:13px 14px;
+  background:rgba(24,22,20,.42);border-radius:10px;color:var(--soft)
+}
+.badge{font-size:11px;color:#c5d2bd;letter-spacing:.08em}
+.quote{font-size:24px;line-height:1.35;color:var(--cream)}
+@media(max-width:800px){.grid{grid-template-columns:1fr}.shell{padding-top:20px}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="topbar">
+    <a class="back" href="keerthi_personal_dashboard_FINAL_v2.html">← Dashboard</a>
+    <div style="color:#b9aa99;font-size:12px;letter-spacing:.12em;text-transform:uppercase">HOME</div>
+  </div>
+
+  <h1>ONE DAY AT A TIME</h1>
+  <div class="subtitle">Home · Life · Routines</div>
+
+  <div class="grid">
+    <section class="card hero">
+      <div class="eyebrow">Home</div>
+      <h2>A quiet place for the things that matter.</h2>
+      <p>This page is the starting point for the home side of the dashboard. It keeps the same warm walnut, forest green, charcoal and taupe language as the main page.</p>
+    </section>
+
+    <section class="card">
+      <h2>Today</h2>
+      <div class="list">
+        <div class="item"><span>Home reset</span><span class="badge">DAILY</span></div>
+        <div class="item"><span>Kitchen</span><span class="badge">ROUTINE</span></div>
+        <div class="item"><span>Family</span><span class="badge">PRIORITY</span></div>
+        <div class="item"><span>Small wins</span><span class="badge">ONGOING</span></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Notes</h2>
+      <div class="quote">“Make the ordinary feel intentional.”</div>
+    </section>
+
+    <section class="card">
+      <h2>Quick links</h2>
+      <div class="list">
+        <div class="item"><span>Routines</span><span>→</span></div>
+        <div class="item"><span>Calendar</span><span>→</span></div>
+        <div class="item"><span>Vision</span><span>→</span></div>
+      </div>
+    </section>
+  </div>
+</div>
+</body>
+</html>
