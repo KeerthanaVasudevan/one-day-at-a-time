@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ONE DAY AT A TIME</title>
+<style>
+:root{
+  --cream:#e8dfd3;
+  --panel:rgba(75,56,45,.88);
+  --border:rgba(232,223,211,.55);
+  --line:rgba(232,223,211,.38);
+  --shadow:0 8px 22px rgba(0,0,0,.18);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#211b17;color:var(--cream);font-family:Georgia,"Times New Roman",serif}
+body{min-height:100vh;overflow-x:hidden}
+
+.dashboard{
+  position:relative;
+  width:min(1536px,100vw);
+  aspect-ratio:3/2;
+  min-height:700px;
+  margin:0 auto;
+  overflow:hidden;
+  background:#211b17 url("bg.png") center center / cover no-repeat;
+}
+.shell{position:absolute;inset:0}
+
+.dashboard-title{
+  position:absolute;
+  left:50%;top:5.8%;
+  transform:translateX(-50%);
+  margin:0;
+  color:var(--cream);
+  font-size:clamp(24px,2.55vw,39px);
+  font-weight:700;
+  letter-spacing:.20em;
+  line-height:1;
+  white-space:nowrap;
+  text-align:center;
+  text-shadow:0 1px 3px rgba(0,0,0,.45);
+}
+.dashboard-title:after{
+  content:"";display:block;width:72%;height:1px;
+  margin:14px auto 0;background:rgba(232,223,211,.72)
+}
+
+/* One centered content system. Everything below the title uses these same edges. */
+.content{
+  position:absolute;
+  left:50%;top:17.8%;
+  transform:translateX(-50%);
+  width:74%;
+  height:72.5%;
+  display:grid;
+  grid-template-columns:1.72fr .72fr;
+  grid-template-rows:16.5% 38% 38%;
+  column-gap:2.1%;
+  row-gap:3.2%;
+}
+
+.panel,.tab{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:12px;
+  box-shadow:var(--shadow);
+}
+
+/* Top navigation: clean 2 x 2 grid, with equal spacing. */
+.tabs{
+  grid-column:1;
+  grid-row:1;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:1fr 1fr;
+  gap:9%;
+}
+.tab{
+  width:100%;height:100%;
+  min-width:0;
+  color:var(--cream);
+  cursor:pointer;
+  font:500 clamp(12px,1.15vw,18px) Georgia,"Times New Roman",serif;
+  letter-spacing:.20em;
+}
+.tab:hover{background:rgba(75,56,45,.96)}
+.tab:focus-visible{outline:1px solid var(--cream);outline-offset:-2px}
+
+.clock{
+  grid-column:2;grid-row:1;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  overflow:hidden;text-align:center;
+}
+.live-time{font:500 clamp(18px,2vw,30px)/1.05 Georgia,"Times New Roman",serif;letter-spacing:.035em;white-space:nowrap}
+.live-date{font:15px/1.2 Georgia,"Times New Roman",serif;margin-top:7px;letter-spacing:.02em;white-space:nowrap}
+
+/* Middle row: routine on the left, tracker stack in the middle, calendar on right. */
+.middle-left{
+  grid-column:1;grid-row:2;
+  display:grid;
+  grid-template-columns:1fr .43fr;
+  gap:2.8%;
+  min-width:0;
+}
+.routine{position:relative;padding:5.5% 5%;overflow:hidden}
+.panel-title{font-size:clamp(12px,1.1vw,17px);letter-spacing:.22em}
+.divider{height:1px;background:var(--line);margin-top:3.5%;width:100%}
+.checklist{
+  position:absolute;left:5%;right:5%;top:27%;bottom:6%;
+  display:grid;grid-template-columns:1fr 1fr;
+  grid-template-rows:repeat(5,1fr);
+  column-gap:10%;
+}
+.check-item{display:flex;align-items:center;gap:10px;min-width:0}
+.check-item input[type=checkbox]{
+  width:20px;height:20px;appearance:none;-webkit-appearance:none;
+  border:1px solid var(--cream);border-radius:3px;background:transparent;cursor:pointer;flex:none
+}
+.check-item input[type=checkbox]:checked{background:#414337}
+.check-item input[type=checkbox]:checked::after{content:"✓";display:block;text-align:center;line-height:18px;color:var(--cream);font-size:13px}
+.check-item input[type=text]{
+  width:100%;min-width:0;border:0;border-bottom:1px solid var(--line);
+  background:transparent;color:var(--cream);outline:none;padding:4px 2px;
+  font:13px Georgia,"Times New Roman",serif
+}
+.check-item input[type=text]:focus{border-bottom-color:var(--cream)}
+
+.tracker-stack{
+  display:grid;grid-template-rows:1fr 1fr;gap:5.5%;min-width:0
+}
+.tracker,.empty-panel{position:relative;overflow:hidden;padding:9% 9%}
+.tracker .divider{margin-top:5%}
+
+.calendar{
+  grid-column:2;grid-row:2;
+  padding:8% 6% 5%;overflow:hidden
+}
+.calendar-head{display:flex;justify-content:space-between;align-items:center;font-size:clamp(8px,.72vw,11px);letter-spacing:.11em;white-space:nowrap}
+.calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:7%;font:13px Georgia,"Times New Roman",serif;text-align:center}
+.calendar-grid div{padding:5px 0;border-radius:50%}
+.calendar-grid .today{background:rgba(139,129,119,.65);font-weight:700}
+
+/* Vision board shares the exact left/right edges of the whole content system. */
+.vision{
+  grid-column:1 / -1;grid-row:3;
+  padding:3% 2.4% 2.4%;position:relative;overflow:hidden
+}
+.vision .divider{margin-top:1.8%}
+.vision-content{
+  position:absolute;left:2.4%;right:2.4%;top:25%;bottom:5%;
+  border:1px dashed rgba(232,223,211,.45);border-radius:8px;
+  display:flex;align-items:center;justify-content:center;overflow:hidden
+}
+.vision-content img{width:100%;height:100%;object-fit:contain;display:none}
+.vision-file{display:none}
+.add-image{border:1px solid rgba(232,223,211,.55);background:rgba(75,56,45,.35);color:var(--cream);padding:10px 18px;border-radius:20px;cursor:pointer;font:13px Georgia,"Times New Roman",serif;letter-spacing:.08em}
+
+@media(max-width:700px){
+  .dashboard{width:100vw;min-height:0;height:auto;aspect-ratio:3/2;background-size:cover}
+  .content{width:74%;height:72.5%}
+  .dashboard-title{font-size:clamp(18px,3.8vw,26px);letter-spacing:.16em}
+  .dashboard-title:after{margin-top:8px}
+  .tab{font-size:clamp(8px,1.7vw,13px)}
+  .live-time{font-size:clamp(11px,2.6vw,20px)}
+  .live-date{font-size:clamp(7px,1.4vw,11px);margin-top:4px}
+  .calendar-grid{font-size:9px;gap:1px}
+  .calendar-grid div{padding:2px 0}
+  .check-item{gap:5px}
+  .check-item input[type=checkbox]{width:15px;height:15px}
+  .check-item input[type=checkbox]:checked::after{line-height:13px;font-size:9px}
+  .check-item input[type=text]{font-size:9px;padding:2px}
+}
+</style>
+</head>
+<body>
+<div class="dashboard">
+  <main class="shell">
+    <h1 class="dashboard-title">ONE DAY AT A TIME</h1>
+
+    <div class="content">
+      <nav class="tabs" aria-label="Main sections">
+        <button class="tab" onclick="navigate('keerthi')">KEERTHI</button>
+        <button class="tab" onclick="navigate('dhaksha')">DHAKSHA</button>
+        <button class="tab" onclick="navigate('home')">HOME</button>
+        <button class="tab" onclick="navigate('money')">₹</button>
+      </nav>
+
+      <section class="clock panel" aria-label="Live India Standard Time">
+        <div class="live-time" id="liveTime">TIME</div>
+        <div class="live-date" id="liveDate">IST · LIVE</div>
+      </section>
+
+      <div class="middle-left">
+        <section class="routine panel" aria-label="Routine Flow checklist">
+          <div class="panel-title">ROUTINE FLOW</div>
+          <div class="divider"></div>
+          <div class="checklist" id="checklist"></div>
+        </section>
+
+        <div class="tracker-stack">
+          <section class="tracker panel" aria-label="Tracker">
+            <div class="panel-title">TRACKER</div>
+            <div class="divider"></div>
+          </section>
+          <section class="empty-panel panel" aria-label="Empty panel"></section>
+        </div>
+      </div>
+
+      <section class="calendar panel" aria-label="Current month calendar">
+        <div class="calendar-head"><span>‹</span><span id="calendarTitle">OCTOBER 2026</span><span>›</span></div>
+        <div class="calendar-grid" id="calendar"></div>
+      </section>
+
+      <section class="vision panel" aria-label="Vision Board">
+        <div class="panel-title">VISION BOARD</div>
+        <div class="divider"></div>
+        <div class="vision-content">
+          <input class="vision-file" id="visionFile" type="file" accept="image/*">
+          <img id="visionImage" alt="Vision board image">
+          <button class="add-image" id="addImage">＋ ADD AN IMAGE</button>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+
+<script>
+const TZ='Asia/Kolkata';
+
+function updateLiveClock(){
+  const now=new Date();
+  const parts=new Intl.DateTimeFormat('en-US',{timeZone:TZ,hour:'numeric',minute:'2-digit',second:'2-digit',hour12:true,weekday:'short',day:'numeric',month:'short',year:'numeric'}).formatToParts(now);
+  const v=Object.fromEntries(parts.map(p=>[p.type,p.value]));
+  document.getElementById('liveTime').textContent=`${v.hour}:${v.minute}:${v.second} ${v.dayPeriod}`;
+  document.getElementById('liveDate').textContent=`${v.weekday}, ${v.day} ${v.month} ${v.year} · IST`;
+}
+
+function buildCalendar(){
+  const now=new Date();
+  const parts=new Intl.DateTimeFormat('en-US',{timeZone:TZ,year:'numeric',month:'numeric',day:'numeric'}).formatToParts(now);
+  const v=Object.fromEntries(parts.map(p=>[p.type,p.value]));
+  const y=Number(v.year),m=Number(v.month)-1,today=Number(v.day);
+  const first=new Date(Date.UTC(y,m,1)).getUTCDay();
+  const total=new Date(Date.UTC(y,m+1,0)).getUTCDate();
+  document.getElementById('calendarTitle').textContent=new Intl.DateTimeFormat('en-US',{timeZone:TZ,month:'long',year:'numeric'}).format(now).toUpperCase();
+  let out='';
+  for(let i=0;i<first;i++)out+='<div></div>';
+  for(let d=1;d<=total;d++)out+=`<div class="${d===today?'today':''}">${d}</div>`;
+  document.getElementById('calendar').innerHTML=out;
+}
+
+function navigate(section){
+  localStorage.setItem('dashboard-section',section);
+  if(section==='home') window.location.href='home.html';
+}
+
+function saveChecklist(){
+  const data=[...document.querySelectorAll('.check-item')].map(x=>({checked:x.querySelector('input[type=checkbox]').checked,text:x.querySelector('input[type=text]').value}));
+  localStorage.setItem('routine-checklist',JSON.stringify(data));
+}
+function loadChecklist(){
+  const box=document.getElementById('checklist');
+  const saved=JSON.parse(localStorage.getItem('routine-checklist')||'null');
+  for(let i=0;i<10;i++){
+    const item=saved?.[i]||{checked:false,text:''};
+    box.insertAdjacentHTML('beforeend',`<label class="check-item"><input type="checkbox" ${item.checked?'checked':''}><input type="text" value="${String(item.text).replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;')}"></label>`);
+  }
+  box.querySelectorAll('input').forEach(el=>el.addEventListener('input',saveChecklist));
+  box.querySelectorAll('input[type=checkbox]').forEach(el=>el.addEventListener('change',saveChecklist));
+}
+function loadVision(){
+  const img=document.getElementById('visionImage');
+  const saved=localStorage.getItem('vision-image');
+  if(saved){img.src=saved;img.style.display='block';document.getElementById('addImage').style.display='none';}
+  document.getElementById('addImage').onclick=()=>document.getElementById('visionFile').click();
+  document.getElementById('visionFile').onchange=e=>{
+    const f=e.target.files[0];if(!f)return;
+    const r=new FileReader();
+    r.onload=()=>{img.src=r.result;img.style.display='block';document.getElementById('addImage').style.display='none';localStorage.setItem('vision-image',r.result)};
+    r.readAsDataURL(f);
+  };
+}
+
+updateLiveClock();
+setInterval(updateLiveClock,1000);
+buildCalendar();
+loadChecklist();
+loadVision();
+</script>
+</body>
+</html>
